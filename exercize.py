@@ -1,7 +1,5 @@
 """Main assignment module."""
 import csv
-import string
-from difflib import get_close_matches
 
 import utils
 
@@ -38,22 +36,9 @@ def tenants():
     must_dict = get_must_dict()
     final = dict()
     for must in must_dict:
-        name = clean_tenant_name(must["Tenant Name"])
+        name = utils.clean_tenant_name(must["Tenant Name"])
         final[name] = final.setdefault(name, 0) + 1
     return final
-
-
-pool_name = list()
-
-
-def clean_tenant_name(name):
-    """Cleanup the name of tenant."""
-    name = "".join(c for c in name if c not in string.punctuation)
-    existing = get_close_matches(name, pool_name, 1, 0.8)
-    if existing:
-        return existing[0]
-    pool_name.append(name)
-    return name
 
 
 def list_rental_by_lease_date():
