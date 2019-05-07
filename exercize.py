@@ -3,6 +3,8 @@ import csv
 import string
 from difflib import get_close_matches
 
+import utils
+
 
 def get_must_dict():
     """Read the csv and return the Orderdict."""
@@ -52,3 +54,15 @@ def clean_tenant_name(name):
         return existing[0]
     pool_name.append(name)
     return name
+
+
+def list_rental_by_lease_date():
+    """List rental by lease date and filter by given dates."""
+    must_dict = get_must_dict()
+    final = list()
+    start, end = utils.str2date("1 Jun 1999"), utils.str2date("31 Aug 2007")
+    for must in must_dict:
+        lease_date = utils.str2date(must["Lease Start Date"])
+        if start < lease_date < end:
+            final.append(must)
+    return final
