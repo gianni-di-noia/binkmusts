@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-"""Main function."""
+"""Main tests module."""
 import exercize
 
 
@@ -30,6 +29,12 @@ def test_tenants():
     assert len(final.keys()) == 8
     tenant_count = sum(final.values())
     assert tenant_count == 42
+
+
+def test_list_rental_by_lease_date():
+    """Runt the tests for the fourth assignment."""
+    final = exercize.list_rental_by_lease_date()
+    assert len(final) == 5
 
 
 if __name__ == "__main__":
